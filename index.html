@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070707">
+  <meta name="description" content="EVIL — حساباتي وموسيقاي في مكان واحد.">
+  <title>EVIL — Official</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: #070707;
+      color: #f5f5f5;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      --muted: #929292;
+      --panel: rgba(18, 18, 18, .86);
+      --line: rgba(255, 255, 255, .09);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      background: #070707;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: 0;
+      inset: -2%;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, .28), rgba(0, 0, 0, .52) 58%, #070707 100%),
+        radial-gradient(ellipse at 50% 45%, transparent 0, rgba(0, 0, 0, .38) 78%),
+        url("cls63-background.png");
+      background-position: center, center, center 54%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      content: "";
+      animation: drift 22s ease-in-out infinite alternate;
+      filter: saturate(.82);
+      pointer-events: none;
+    }
+
+    body::after {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 32rem 7rem at 12% 72%, rgba(220, 220, 220, .10), transparent 72%),
+        radial-gradient(ellipse 28rem 7rem at 84% 58%, rgba(185, 185, 185, .08), transparent 72%);
+      content: "";
+      animation: smoke 12s ease-in-out infinite alternate;
+      filter: blur(26px);
+      pointer-events: none;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(-.5%, 0, 0) scale(1.02); }
+      to { transform: translate3d(.5%, -1%, 0) scale(1.07); }
+    }
+
+    @keyframes smoke {
+      from { opacity: .35; transform: translate3d(-2%, 2%, 0); }
+      to { opacity: .85; transform: translate3d(2%, -1%, 0); }
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 32px, 600px);
+      margin: 0 auto;
+      padding: 46px 0 30px;
+    }
+
+    .profile {
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      animation: appear .7s ease both;
+    }
+
+    .avatar {
+      display: grid;
+      width: 104px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 25%, #444, transparent 38%),
+        linear-gradient(145deg, #191919, #050505 70%);
+      box-shadow: 0 0 45px rgba(255, 255, 255, .09), inset 0 0 20px #000;
+      color: #fff;
+      font-size: 34px;
+      font-weight: 850;
+      letter-spacing: -.08em;
+      text-indent: -.08em;
+      overflow: hidden;
+    }
+
+    .avatar img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      object-fit: cover;
+    }
+
+    h1 {
+      margin: 16px 0 3px;
+      font-size: 27px;
+      font-weight: 750;
+      letter-spacing: .14em;
+      direction: ltr;
+    }
+
+    .verified {
+      display: inline-grid;
+      width: 17px;
+      aspect-ratio: 1;
+      margin-inline-start: 4px;
+      place-items: center;
+      border-radius: 50%;
+      background: #f4f4f4;
+      color: #080808;
+      font-size: 11px;
+      vertical-align: 3px;
+    }
+
+    .bio {
+      margin: 6px 0 0;
+      color: #a4a4a4;
+      font-size: 13px;
+      letter-spacing: .08em;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 27px 0 24px;
+      direction: ltr;
+    }
+
+    .social {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: linear-gradient(150deg, #1d1d1d, #101010);
+      color: #f8f8f8;
+      text-decoration: none;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .social:hover, .social:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, .38);
+      background: #242424;
+      outline: none;
+    }
+
+    .social svg {
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.8;
+    }
+
+    .spotify-mark { fill: currentColor; stroke: none; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 2px 11px;
+      color: #aaa;
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: .16em;
+    }
+
+    .section-label::after {
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, var(--line));
+      content: "";
+    }
+
+    .music-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: var(--panel);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, .35);
+      animation: appear .8s .12s ease both;
+      backdrop-filter: blur(14px);
+    }
+
+    .music-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 17px 12px;
+    }
+
+    .track-info { text-align: right; }
+
+    .track-name {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .track-artist {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .playing {
+      display: flex;
+      height: 23px;
+      align-items: center;
+      gap: 3px;
+      padding-inline: 8px;
+      direction: ltr;
+    }
+
+    .playing span {
+      width: 3px;
+      height: 8px;
+      border-radius: 3px;
+      background: #e7e7e7;
+      animation: equalize .85s ease-in-out infinite alternate;
+    }
+
+    .playing span:nth-child(2) { height: 16px; animation-delay: .18s; }
+    .playing span:nth-child(3) { height: 11px; animation-delay: .33s; }
+    .playing span:nth-child(4) { height: 19px; animation-delay: .1s; }
+
+    @keyframes equalize {
+      to { transform: scaleY(.35); opacity: .48; }
+    }
+
+    .player {
+      display: block;
+      width: 100%;
+      height: 152px;
+      border: 0;
+      background: #111;
+    }
+
+    .play-note {
+      margin: 0;
+      padding: 0 16px 14px;
+      color: #8d8d8d;
+      font-size: 11px;
+    }
+
+    footer {
+      margin-top: 21px;
+      color: #666;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      main { padding-top: 34px; }
+      .avatar { width: 92px; }
+      .socials { gap: 9px; }
+      .social { width: 43px; height: 43px; border-radius: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="profile">
+      <div class="avatar">
+        <img
+          src="https://ugc.production.linktr.ee/b3d21eb3-86e8-48fd-a458-50346e818d56_Evil-Anime-Noir-Poster.png?io=true&amp;size=avatar-v3_0&amp;crop=1,0.75,x0p,y0p,safe"
+          alt="صورة الملف الشخصي EVIL">
+      </div>
+      <h1>EVIL<span class="verified" aria-label="Official">★</span></h1>
+      <p class="bio">حساباتي وموسيقاي في مكان واحد</p>
+    </header>
+
+    <nav class="socials" aria-label="حساباتي على مواقع التواصل">
+      <a class="social" href="https://www.instagram.com/u_22u2/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+          <circle cx="12" cy="12" r="4"></circle>
+          <circle cx="17.7" cy="6.5" r=".8" fill="currentColor" stroke="none"></circle>
+        </svg>
+      </a>
+      <a class="social" href="https://www.tiktok.com/@e5v_l?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 4v10.1a4.1 4.1 0 1 1-3.4-4.05"></path>
+          <path d="M14 4c.4 2.4 1.8 4 4.5 4.5"></path>
+        </svg>
+      </a>
+      <a class="social" href="https://snapchat.com/t/8DvH6Za3" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3.2c-2.7 0-4.3 2-4.3 4.8v3.2c-.7.4-1.6.7-2.5.8-.5.1-.7.8-.1 1.1l1.5.8c.3.2.4.5.3.8-.2.5-.8.9-1.8 1.1-.5.1-.5.8 0 1 1.1.4 2.1.4 3 .3.9 1.1 2.3 1.8 3.9 1.8s3-.7 3.9-1.8c.9.1 1.9.1 3-.3.5-.2.5-.9 0-1-1-.2-1.6-.6-1.8-1.1-.1-.3 0-.6.3-.8l1.5-.8c.6-.3.4-1-.1-1.1-.9-.1-1.8-.4-2.5-.8V8c0-2.8-1.6-4.8-4.3-4.8Z"></path>
+        </svg>
+      </a>
+      <a class="social" href="https://open.spotify.com/user/31bdubshd3mmb72nofla7ax6hyru?si=c5ad342e88864ca4" target="_blank" rel="noopener noreferrer" aria-label="Spotify profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle class="spotify-mark" cx="12" cy="12" r="10"></circle>
+          <path d="M6.5 9.2c3.9-1.2 7.7-.8 11 1" stroke="#090909" stroke-width="1.5"></path>
+          <path d="M7.3 12.2c3.1-.9 6.4-.5 9.2.9" stroke="#090909" stroke-width="1.35"></path>
+          <path d="M8 15c2.4-.6 4.8-.3 7 .8" stroke="#090909" stroke-width="1.2"></path>
+        </svg>
+      </a>
+    </nav>
+
+    <section aria-labelledby="music-title">
+      <h2 class="section-label" id="music-title">الأغنية المفضلة</h2>
+      <div class="music-card">
+        <div class="music-heading">
+          <div class="track-info">
+            <p class="track-name">Где ты теперь и с кем</p>
+            <p class="track-artist">Basta, HammAli &amp; Navai · Spotify</p>
+          </div>
+          <div class="playing" aria-label="مؤثر بصري متحرك" role="img">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <iframe
+          class="player"
+          title="مشغل أغنية Где ты теперь и с кем على Spotify"
+          src="https://open.spotify.com/embed/track/7zKRBfhF6CABVsc8b1spJ0?utm_source=generator&amp;theme=0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+        <p class="play-note">اضغط زر التشغيل داخل المشغل لبدء الأغنية.</p>
+      </div>
+    </section>
+
+    <footer>EVIL · OFFICIAL</footer>
+  </main>
+</body>
+</html>
