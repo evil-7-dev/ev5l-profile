@@ -75,7 +75,7 @@
       z-index: 2;
       width: min(100% - 32px, 600px);
       margin: 0 auto;
-      padding: 46px 0 30px;
+      padding: 126px 0 30px;
     }
 
     .profile {
@@ -266,6 +266,20 @@
       background: #111;
     }
 
+    .music-section {
+      position: fixed;
+      z-index: 5;
+      top: 12px;
+      right: 12px;
+      width: min(320px, calc(100vw - 24px));
+    }
+
+    .music-section .section-label,
+    .music-section .music-heading,
+    .music-section .play-note {
+      display: none;
+    }
+
     #spotify-player,
     #spotify-player iframe,
     .player iframe {
@@ -295,7 +309,7 @@
     }
 
     @media (max-width: 480px) {
-      main { padding-top: 34px; }
+      main { padding-top: 126px; }
       .avatar { width: 92px; }
       .socials { gap: 9px; }
       .social { width: 43px; height: 43px; border-radius: 14px; }
@@ -362,7 +376,7 @@
       </a>
     </nav>
 
-    <section aria-labelledby="music-title">
+    <section class="music-section" aria-labelledby="music-title">
       <h2 class="section-label" id="music-title">الأغنية المفضلة</h2>
       <div class="music-card">
         <div class="music-heading">
