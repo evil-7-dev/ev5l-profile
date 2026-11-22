@@ -244,6 +244,10 @@
       height: 8px;
       border-radius: 3px;
       background: #e7e7e7;
+      opacity: .45;
+    }
+
+    .playing[data-playing="true"] span {
       animation: equalize .85s ease-in-out infinite alternate;
     }
 
@@ -256,11 +260,19 @@
     }
 
     .player {
-      display: block;
       width: 100%;
-      height: 152px;
-      border: 0;
+      height: 80px;
+      overflow: hidden;
       background: #111;
+    }
+
+    #spotify-player,
+    #spotify-player iframe,
+    .player iframe {
+      display: block;
+      width: 100% !important;
+      height: 80px !important;
+      border: 0;
     }
 
     .play-note {
@@ -358,23 +370,42 @@
             <p class="track-name">Где ты теперь и с кем</p>
             <p class="track-artist">Basta, HammAli &amp; Navai · Spotify</p>
           </div>
-          <div class="playing" aria-label="مؤثر بصري متحرك" role="img">
+          <div class="playing" data-playing="false" aria-label="الأغنية متوقفة" role="img">
             <span></span><span></span><span></span><span></span>
           </div>
         </div>
-        <iframe
-          class="player"
-          title="مشغل أغنية Где ты теперь и с кем على Spotify"
-          src="https://open.spotify.com/embed/track/7zKRBfhF6CABVsc8b1spJ0?utm_source=generator&amp;theme=0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin">
-        </iframe>
-        <p class="play-note">اضغط زر التشغيل داخل المشغل لبدء الأغنية.</p>
+        <div class="player" role="region" aria-label="مشغل أغنية Где ты теперь и с кем على Spotify">
+          <div id="spotify-player"></div>
+        </div>
+        <p class="play-note">نحاول تشغيلها تلقائيًا. إذا لم تبدأ، اضغط تشغيل؛ بعض المتصفحات تمنع التشغيل التلقائي.</p>
       </div>
     </section>
 
     <footer>EVIL · OFFICIAL</footer>
   </main>
+  <script>
+    window.onSpotifyIframeApiReady = IFrameAPI => {
+      const element = document.getElementById("spotify-player");
+      const indicator = document.querySelector(".playing");
+
+      IFrameAPI.createController(element, {
+        width: 600,
+        height: 80,
+        url: "https://open.spotify.com/track/7zKRBfhF6CABVsc8b1spJ0?utm_source=generator&theme=0",
+      }, controller => {
+        const updateIndicator = isPlaying => {
+          indicator.dataset.playing = String(isPlaying);
+          indicator.setAttribute("aria-label", isPlaying ? "الأغنية تعمل" : "الأغنية متوقفة");
+        };
+
+        controller.addListener("ready", () => controller.play());
+        controller.addListener("playback_started", () => updateIndicator(true));
+        controller.addListener("playback_update", event => {
+          updateIndicator(!event.data.isPaused && !event.data.isBuffering);
+        });
+      });
+    };
+  </script>
+  <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>
 </html>
