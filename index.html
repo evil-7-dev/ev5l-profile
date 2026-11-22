@@ -33,7 +33,7 @@
     body::before {
       position: fixed;
       z-index: 0;
-      inset: -2%;
+      inset: -8%;
       background:
         linear-gradient(180deg, rgba(0, 0, 0, .28), rgba(0, 0, 0, .52) 58%, #070707 100%),
         radial-gradient(ellipse at 50% 45%, transparent 0, rgba(0, 0, 0, .38) 78%),
@@ -42,7 +42,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       content: "";
-      animation: drift 22s ease-in-out infinite alternate;
+      animation: drift 7s ease-in-out infinite;
       filter: saturate(.82);
       pointer-events: none;
     }
@@ -61,8 +61,8 @@
     }
 
     @keyframes drift {
-      from { transform: translate3d(-.5%, 0, 0) scale(1.02); }
-      to { transform: translate3d(.5%, -1%, 0) scale(1.07); }
+      0%, 100% { transform: translate3d(-3%, 0, 0) scale(1.12) rotate(-.35deg); }
+      50% { transform: translate3d(3%, -1%, 0) scale(1.16) rotate(.35deg); }
     }
 
     @keyframes smoke {
@@ -295,6 +295,10 @@
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
+      }
+
+      body::before {
+        animation: drift 7s ease-in-out infinite !important;
       }
     }
   </style>
